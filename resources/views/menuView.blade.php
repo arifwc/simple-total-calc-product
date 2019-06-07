@@ -1,24 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
+@if ($message = Session::get('success'))
+<div class="alert alert-success alert-block">
+	<button type="button" class="close" data-dismiss="alert">×</button>	
+        <strong>{{ $message }}</strong>
+</div>
+@endif
+@if ($message = Session::get('error'))
+<div class="alert alert-danger alert-block">
+	<button type="button" class="close" data-dismiss="alert">×</button>	
+        <strong>{{ $message }}</strong>
+</div>
+@endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Menu</div>
-
+                <div class="card-header">Menu Kantin</div>
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
                     @foreach ($menu as $item)
                         <div class="col-md-3 text-center">
                         <form action="/tambah" method="post">
                             {{ csrf_field() }}
-                            <p>{{$item->menu}}</p><br>
+                            <p>{{$item->menu}}</p>
                             <img width="128px" height="128px" class="img-responsive" src="{{ asset('image/'.$item->path_image) }}"><br>
                             <p>Rp. {{$item->harga}}</p>
                             <input type="hidden" value="{{$item->menu}}" name="menu">

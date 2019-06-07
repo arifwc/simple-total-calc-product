@@ -1,6 +1,4 @@
 <?php
-
-use App\Menu;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,12 +18,6 @@ Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::resource('menu', 'MenuController');
-
-Route::get('/menu',function(){
-    $menu = Menu::all();
-    return view('menuView',compact('menu'));
-});
-
+Route::get('/menu','MenuController@liatMenu');
 Route::post('/tambah','PesananController@tambah');
 Route::get('/keranjang', 'PesananController@liatKeranjang');
